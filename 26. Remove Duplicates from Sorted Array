@@ -1,0 +1,21 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+            //不知道为什么不能用Hashset
+            // HashSet<Integer> set = new HashSet<>();
+            // for(int i = 0; i < nums.length; i++){
+            //     set.add(nums[i]);
+            // }
+            // return set.size();
+        
+        //同向双指针吧
+        if (nums.length == 0) return 0;//同向双指针。每次i前进的时候当num[i]和nums[j]不相等的时候，跟新i的位置。
+        int i = 0;
+        for(int j = 0; j < nums.length; j++){
+            if(nums[i] != nums[j]){
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i + 1;
+    }
+}
