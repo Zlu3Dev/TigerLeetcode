@@ -1,0 +1,27 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+      
+        //low the left side = 0 and high the length of the the nums = 5;
+       
+      List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        for(int i =0;i< nums.length -2; i++){
+          if(i >0 && nums[i] == nums[i-1]) continue;//考虑数据一样的情况,去重复,这步很重要。而且必须要i>0。不然就会index out of boundary。
+            int target = -nums[i];
+            int left = i+1; int right =nums.length -1;
+            while(left < right)
+                if ( nums[left]+nums[right] == target){
+                    list.add(Arrays.asList(-target,nums[left],nums[right]));//两边向中间找
+                    left++;
+                    right--;
+                    while(left < right && nums[left] == nums[left -1]) left++; //考虑duplicate
+                    while(left < right && nums[right] == nums[right+1]) right--;
+                }else if (nums[left]+nums[right]>target){
+                    right--;
+                }else if (nums[left]+nums[right]<target){
+                    left++;
+                }
+        }
+        return list;
+    }
+}
