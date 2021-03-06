@@ -1,0 +1,32 @@
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+     HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i = 0; i < nums1.length; i++){
+            if(map.containsKey(nums1[i])){
+                map.put(nums1[i],map.get(nums1[i]) + 1);
+            }else{
+                map.put(nums1[i], 1);
+            }
+        }
+        ArrayList<Integer> array = new ArrayList<>();
+        for(int i = 0; i < nums2.length; i++){
+            if(map.containsKey(nums2[i])) {
+                array.add(nums2[i]);//先把每一个nums2的值加进去一个array中，但是我们如何remove他们呢？
+                int freq = map.get(nums2[i]);//用一个计数器当计数器等于1的时候就remove掉
+                if(freq == 1){//这个就是帮助我们remove map中的值。
+                    map.remove(nums2[i], map.get(nums2[i]));
+                }else{
+                    map.put(nums2[i], map.get(nums2[i]) - 1);//同时当freq大于1的值得时候我们就要降低值 - 1。
+                }
+            }
+        }
+        int [] results = new int[array.size()];//最后把所有制加入到一个array中。
+        for(int i = 0; i < array.size(); i++){
+            results[i] = array.get(i);
+        }
+        
+        return results;
+    }
+}
+
+ 
