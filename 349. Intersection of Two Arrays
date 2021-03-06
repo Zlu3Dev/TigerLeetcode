@@ -1,0 +1,23 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> intersect = new HashSet<>();
+        for(int num1 : nums1){//先去重
+            set.add(num1);
+        }
+        for(int i = 0; i < nums2.length; i++){//然后看set2中的元素放进set1中
+            if(set.contains(nums2[i])){//using contains
+                intersect.add(nums2[i]);
+            }
+        }
+        int [] results = new int[intersect.size()];//确定res的大小就是set2的大小。
+        int i = 0;//定义个i然后res[i++]就可以得到答案了。
+        for(int num : intersect){//原来可以直接loop hashset。
+            results[i++] = num;
+        }
+        return results;
+    }
+}
+
+       
+      
